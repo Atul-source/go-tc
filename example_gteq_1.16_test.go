@@ -10,9 +10,9 @@ import (
 
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/asm"
-	"github.com/florianl/go-tc"
-	"github.com/florianl/go-tc/core"
-	"github.com/florianl/go-tc/internal/unix"
+	"github.com/Atul-source/go-tc"
+	"github.com/Atul-source/go-tc/core"
+	"github.com/Atul-source/go-tc/internal/unix"
 	"github.com/jsimonetti/rtnetlink"
 	"github.com/mdlayher/netlink"
 )

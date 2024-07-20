@@ -9,7 +9,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/florianl/go-tc/core"
+	"github.com/Atul-source/go-tc/core"
 	"github.com/jsimonetti/rtnetlink"
 	"golang.org/x/sys/unix"
 )

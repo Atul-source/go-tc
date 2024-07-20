@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 	"unsafe"
-	"github.com/florianl/go-tc/internal/unix"
+	"github.com/Atul-source/go-tc/internal/unix"
 	"github.com/josharian/native"
 	"github.com/mdlayher/netlink"
 )

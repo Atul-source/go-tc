@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/florianl/go-tc"
+	"github.com/Atul-source/go-tc"
 )
 
 func ExampleActions() {

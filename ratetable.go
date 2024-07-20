@@ -5,8 +5,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/florianl/go-tc/core"
-	"github.com/florianl/go-tc/internal/unix"
+	"github.com/Atul-source/go-tc/core"
+	"github.com/Atul-source/go-tc/internal/unix"
 )
 
 // iproute2/tc/tc_core.c:tc_calc_rtable()

@@ -5,7 +5,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/florianl/go-tc/core"
+	"github.com/Atul-source/go-tc/core"
 	"github.com/google/go-cmp/cmp"
 )
 

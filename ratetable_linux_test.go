@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/florianl/go-tc/internal/unix"
+	"github.com/Atul-source/go-tc/internal/unix"
 )
 
 var (
