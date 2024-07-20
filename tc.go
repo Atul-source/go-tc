@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"syscall"
 	"time"
-	"unsafe"
+
 	"github.com/Atul-source/go-tc/internal/unix"
 	"github.com/josharian/native"
 	"github.com/mdlayher/netlink"
@@ -34,7 +35,7 @@ type Tc struct {
 var nativeEndian = native.Endian
 
 // Open establishes a RTNETLINK socket for traffic control
-func Open(config *Config) (*Tc, error, int) {
+func Open(config *Config) (*Tc, error, uintptr) {
 	var tc Tc
 
 	if config == nil {
@@ -42,11 +43,22 @@ func Open(config *Config) (*Tc, error, int) {
 	}
 
 	con, err := netlink.Dial(unix.NETLINK_ROUTE, &netlink.Config{NetNS: config.NetNS})
-	fd := *(*int)(unsafe.Pointer(uintptr(unsafe.Pointer(con)) + unsafe.Sizeof(&netlink.Conn{})))
 	if err != nil {
-		return nil, err, -1
+		return nil, err, 0
 	}
-	tc.con = con
+	var kd syscall.RawConn
+	kd, err = con.SyscallConn()
+	if err != nil {
+		return nil, err, 0
+	}
+	var Fd uintptr
+	err = kd.Control(func(fd uintptr) {
+		Fd = fd
+	})
+
+	if err != nil {
+		return nil, err, 0
+	}
 
 	if config.Logger == nil {
 		tc.logger = setDummyLogger()
@@ -54,7 +66,7 @@ func Open(config *Config) (*Tc, error, int) {
 		tc.logger = config.Logger
 	}
 
-	return &tc, nil, fd
+	return &tc, nil, Fd
 }
 
 // SetOption allows to enable or disable netlink socket options.
