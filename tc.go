@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"time"
-
+	"unsafe"
 	"github.com/florianl/go-tc/internal/unix"
 	"github.com/josharian/native"
 	"github.com/mdlayher/netlink"
@@ -34,7 +34,7 @@ type Tc struct {
 var nativeEndian = native.Endian
 
 // Open establishes a RTNETLINK socket for traffic control
-func Open(config *Config) (*Tc, error) {
+func Open(config *Config) (*Tc, error, int) {
 	var tc Tc
 
 	if config == nil {
@@ -42,8 +42,9 @@ func Open(config *Config) (*Tc, error) {
 	}
 
 	con, err := netlink.Dial(unix.NETLINK_ROUTE, &netlink.Config{NetNS: config.NetNS})
+	fd := *(*int)(unsafe.Pointer(uintptr(unsafe.Pointer(con)) + unsafe.Sizeof(&netlink.Conn{})))
 	if err != nil {
-		return nil, err
+		return nil, err, -1
 	}
 	tc.con = con
 
@@ -53,7 +54,7 @@ func Open(config *Config) (*Tc, error) {
 		tc.logger = config.Logger
 	}
 
-	return &tc, nil
+	return &tc, nil, fd
 }
 
 // SetOption allows to enable or disable netlink socket options.

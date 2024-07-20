@@ -10,7 +10,7 @@ import (
 
 // This example demonstrates how Monitor() can be used
 func ExampleTc_Monitor() {
-	tcSocket, err := tc.Open(&tc.Config{})
+	tcSocket, err, _ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Printf("could not open socket for TC: %v", err)
 		return

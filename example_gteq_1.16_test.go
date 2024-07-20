@@ -47,7 +47,7 @@ func Example_eBPF() {
 	// Open a netlink/tc connection to the Linux kernel. This connection is
 	// used to manage the tc/qdisc and tc/filter to which
 	// the eBPF program will be attached
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err, _ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return

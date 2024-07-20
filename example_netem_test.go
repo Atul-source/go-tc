@@ -36,7 +36,7 @@ func ExampleNetem() {
 		}
 	}(uint32(devID.Index), rtnl)
 
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err,_ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return
@@ -115,7 +115,7 @@ func ExampleNetemDelay() {
 		}
 	}(uint32(devID.Index), rtnl)
 
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err,_ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return

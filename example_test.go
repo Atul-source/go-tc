@@ -17,7 +17,7 @@ import (
 // This example demonstrate how Get() can get used to read information
 func ExampleQdisc_Get() {
 	// open a rtnetlink socket
-	rtnl, err := tc.Open(&tc.Config{})
+	rtnl, err, _ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return
@@ -66,7 +66,7 @@ func ExampleQdisc() {
 	}(uint32(devID.Index), rtnl)
 
 	// open a rtnetlink socket
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err,_ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return
@@ -122,7 +122,7 @@ func Example_cBPF() {
 		}
 	}(uint32(devID.Index), rtnl)
 
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err, _  := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return
@@ -204,7 +204,7 @@ func ExampleU32() {
 		}
 	}(uint32(devID.Index), rtnl)
 
-	tcnl, err := tc.Open(&tc.Config{})
+	tcnl, err,_ := tc.Open(&tc.Config{})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "could not open rtnetlink socket: %v\n", err)
 		return
